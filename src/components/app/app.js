@@ -1,26 +1,20 @@
 import React from 'react';
-
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-
 import './app.css';
+import PeoplePage from './../pages/index';
+import SwapiService from './../../services/swapi-service';
+import { Provider } from '../swapi-context/index';
 
 const App = () => {
+  const swapi = new SwapiService()
   return (
     <div>
+    <Provider value={swapi}>
       <Header />
       <RandomPlanet />
-
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList />
-        </div>
-        <div className="col-md-6">
-          <PersonDetails />
-        </div>
-      </div>
+      <PeoplePage />
+    </Provider>
     </div>
   );
 };

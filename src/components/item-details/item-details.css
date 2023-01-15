@@ -4,7 +4,13 @@
   flex-direction: row;
   padding: 1rem;
 }
-
+button{
+  max-height: 27px;
+}
+.rdf{
+  display: flex;
+  justify-content: space-between;
+}
 .person-details .person-image {
   width: 30%;
   height: 30%;

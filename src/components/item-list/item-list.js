@@ -1,21 +1,29 @@
-import React, { Component } from 'react';
-import './item-list.css';
+import React, { useEffect, useState } from 'react';
+import './item-list.css'
 
-export default class ItemList extends Component {
+const ItemList = ({setItemId, getData, children}) => {
+  const [state, setState] = useState({data: []})
 
-  render() {
-    return (
-      <ul className="item-list list-group">
-        <li className="list-group-item">
-          Luke Skywalker
+  useEffect(() => {
+    getData()
+    .then(data => {
+      setState({data: data})
+    })
+  }, [getData])
+
+  const content = state.data.map(item => {
+      return (
+        <li onClick={()=>setItemId(item.id)} key={item.id} className="list-group-item">
+          {children(item)}
         </li>
-        <li className="list-group-item">
-          Darth Vader
-        </li>
-        <li className="list-group-item">
-          R2-D2
-        </li>
-      </ul>
-    );
-  }
+      )
+  })
+  
+  return(
+  <ul className="item-list list-group aaa">
+    {content}
+  </ul>
+  )
 }
+
+export default ItemList
