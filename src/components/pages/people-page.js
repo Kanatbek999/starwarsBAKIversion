@@ -4,40 +4,34 @@ import {ItemDetails, Record} from './../item-details/index';
 import Row from './../row/row';
 import withSwapi from './../hoc/index';
 //////////////////////////////////////////////////////////
-
-
-//Knopku sdelat ne mogu :(
-let changer = 1
-//tolko tak rabotaet 
-
-
+let c = false
 const leftElementMethods = (swapi) => {
-    const perOrPlanList = changer === 2 ? swapi.getAllPlanets : swapi.getAllPeople
+    const perOrPlanList = c === false ? swapi.getAllPlanets : swapi.getAllPeople
     return({
     getData: perOrPlanList,
 })}
 const NewItemList = withSwapi(ItemList, leftElementMethods)
 //////////////////////////////////////////////////////////
 const rightElementMethods = (swapi) => {
-    const perOrPlanInfo = changer === 2 ? swapi.getPlanet : swapi.getPerson
-    const perOrPlanImg = changer === 2 ? swapi.getPlanetImage : swapi.getPersonImage
+    const perOrPlanInfo = c === false ? swapi.getPlanet : swapi.getPerson
+    const perOrPlanImg = c === false ? swapi.getPlanetImage : swapi.getPersonImage
     return ({
         getData: perOrPlanInfo,
         getImg: perOrPlanImg,
-})}
-const NewItemDetails = withSwapi(ItemDetails, rightElementMethods)
-//////////////////////////////////////////////////////////
-const PeoplePage = () => {
-    const [state, setState] = useState({itemId: 2})
+    })}
+    const NewItemDetails = withSwapi(ItemDetails, rightElementMethods)
+    //////////////////////////////////////////////////////////
+    const PeoplePage = () => {
+    const [state, setState] = useState({itemId: 2})        
 
     const leftElement = 
     <NewItemList setItemId={id=>setState({itemId: id})}>
-        {(choto) => `${choto.name} - ${changer === 1 ? choto.birthYear : choto.rotationPeriod}`}
+        {(choto) => `${choto.name} - ${c === true ? choto.birthYear : choto.rotationPeriod}`}
     </NewItemList>
     const rightElement = <NewItemDetails itemId={state.itemId}>
-            <Record label={changer === 1 ? `Gender: ` : `Population: `} label_key={changer === 1 ? `gender` : `population`}/>
-            <Record label={changer === 1 ? `Birth Year: ` : `Rotation Period: `} label_key={changer === 1 ? `birthYear` : `rotationPeriod`}/>
-            <Record label={changer === 1 ? `Eye Color: `: `Diameter: `} label_key={changer === 1 ? `eyeColor` : `diameter`}/>
+            <Record label={c === true ? `Gender: ` : `Population: `} label_key={c === true ? `gender` : `population`}/>
+            <Record label={c === true ? `Birth Year: ` : `Rotation Period: `} label_key={c === true ? `birthYear` : `rotationPeriod`}/>
+            <Record label={c === true ? `Eye Color: `: `Diameter: `} label_key={c === true ? `eyeColor` : `diameter`}/>
     </NewItemDetails>
 
     return (
