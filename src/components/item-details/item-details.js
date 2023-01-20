@@ -15,7 +15,7 @@ const Record = ({label, label_key, data}) => {
   )
 }
 
-const ItemDetails = ({itemId, getData, children, getImg, l}) => {
+const ItemDetails = ({itemId, getData, children, getImg}) => {
   const [state, setState] = useState({data: {}})
   //////////////////////////////////////////////////////////////////
   const {id, name} = state.data;

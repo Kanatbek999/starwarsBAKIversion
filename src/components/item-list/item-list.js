@@ -3,11 +3,13 @@ import './item-list.css'
 
 const ItemList = ({setItemId, getData, children}) => {
   const [state, setState] = useState({data: []})
+  const [load, setLoad] = useState(false)
 
   useEffect(() => {
     getData()
     .then(data => {
       setState({data: data})
+      setLoad(true)
     })
   }, [getData])
 
@@ -18,7 +20,11 @@ const ItemList = ({setItemId, getData, children}) => {
         </li>
       )
   })
-  
+  if(load === false){
+    return (
+      <div className='loading'>Loading . . .</div>
+    )
+  }
   return(
   <ul className="item-list list-group aaa">
     {content}
