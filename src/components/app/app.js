@@ -38,4 +38,5 @@ const App = () => {
     </div>
   );
 };
+баки чорт
 export default App;
